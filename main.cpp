@@ -15,7 +15,7 @@ void generatePrime(bool *isPrime, int size){
     }
 }
 
-int binsearch(int *array, int b, int n, int k){
+int binsearch(std::vector<int> array, int b, int n, int k){
     if (n < b)
         return -1;
     if (array[b+(n-b)/2] == k)
@@ -26,8 +26,8 @@ int binsearch(int *array, int b, int n, int k){
 
 }
 
-std::vector<int> program(int *A, int *B, int sizeA, int sizeB){
-    std::sort(B, B + sizeB);
+std::vector<int> program(std::vector<int> A, std::vector<int> B, int sizeA, int sizeB){
+    std::sort(B.begin(), B.end());
 
     int max = B[sizeB - 1];
     bool isPrime[max];
@@ -53,7 +53,7 @@ std::vector<int> program(int *A, int *B, int sizeA, int sizeB){
 
     for (int i = 0; i < sizeA; ++i) {
         int k = binsearch(B, 0, howManySize, A[i]);
-        if (k == -1){
+        if (k == -1 ){
             C.push_back(A[i]);
         } else if(!isPrime[howMany[k]]){
             C.push_back(A[i]);
@@ -64,15 +64,15 @@ std::vector<int> program(int *A, int *B, int sizeA, int sizeB){
 
 
 int main() {
-    int A[9] = {2,3,9,2,5,1,3,7,10};
-    int B[13] = {2,1,3,4,3,10,6,6,1,7,10,10,10};
+    std::vector<int> A = {2,3,9,2,5,1,3,7,10};
+    std::vector<int> B = {2,1,3,4,3,10,6,6,1,7,10,10,10};
     std::vector<int> C;
 
 
     C = program(A, B, 9 ,13);
 
-    for (int i = 0; i < C.size(); ++i) {
-        std::cout << C[i] << " ";
+    for (int i : C) {
+        std::cout << i << " ";
     }
     std::cout << std::endl;
 
